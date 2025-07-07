@@ -1,19 +1,19 @@
----
-- name: Deploy app with Podman
+- name: Deploy app with Docker
   hosts: localhost
   connection: local
   become: true
+
   tasks:
-    - name: Stop old Podman container
-      containers.podman.podman_container:
+    - name: Stop old Docker container
+      community.docker.docker_container:
         name: myapp
         state: absent
 
-    - name: Run container with Podman
-      containers.podman.podman_container:
+    - name: Run container with Docker
+      community.docker.docker_container:
         name: myapp
         image: myapp:latest
         state: started
-        publish:
+        published_ports:
           - "5000:5000"
 
