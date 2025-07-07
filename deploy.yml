@@ -1,6 +1,7 @@
 ---
 - name: Deploy app with Podman
   hosts: localhost
+  connection: local
   become: true
   tasks:
     - name: Stop old Podman container
