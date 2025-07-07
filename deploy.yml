@@ -1,0 +1,18 @@
+---
+- name: Deploy app with Podman
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Stop old Podman container
+      containers.podman.podman_container:
+        name: myapp
+        state: absent
+
+    - name: Run container with Podman
+      containers.podman.podman_container:
+        name: myapp
+        image: myapp:latest
+        state: started
+        publish:
+          - "5000:5000"
+
